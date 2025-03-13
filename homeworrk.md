@@ -26,3 +26,6 @@
 -next()
 -next function and errors along with res.send()
 -using arrays[app.use("/route",rh,rh1,rh2,rh3,[rh4,rh5])]
+-what is middelware and how express.js basically handles the request behind the scenes
+-Difference between app.use vs app.all
+-write a dummy auth middleware for admin and user except user/login

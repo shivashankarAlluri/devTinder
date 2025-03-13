@@ -1,34 +1,22 @@
 const express=require("express");
 
+const {adminAuth,userAuth} =require("./middlewares/auth.js");
 const app=express();
 
-app.use("/user",(req,res,next)=>{
-    console.log("1st response in console");
-    //res.send("1st response")
-    next();
-},
-(req,res,next)=>{
-    console.log("2nd response in console");
-    //res.send("2nd response")
-    next();
-},
-(req,res,next)=>{
-    console.log("3rd response in console");
-    //res.send("3rd response")
-    next();
-},
-(req,res,next)=>{
-    console.log("4th response in console");
-    //res.send("4th response")
-    next();
-},
-(req,res,next)=>{
-    console.log("5th response in console");
-    res.send("5th response")
-    next();
-},
+app.use("/admin",adminAuth);
 
-)
+app.get("/admin/getAllData",(req,res)=>{
+    res.send("all data send")
+})
+app.post("/admin/deleteData",(req,res)=>{
+    res.send("deleted data");
+})
+app.get("/user/getAllData",userAuth,(req,res)=>{
+    res.send("all user data send")
+})
+app.get("/user/login",(req,res)=>{
+    res.send("user data send")
+})
 
 app.listen(3000,()=>{
     console.log("server is running at port 3000");
