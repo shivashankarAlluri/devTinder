@@ -29,3 +29,5 @@
 -what is middelware and how express.js basically handles the request behind the scenes
 -Difference between app.use vs app.all
 -write a dummy auth middleware for admin and user except user/login
+
+-Error handling using app.use("/",(err,req,res,next)) at the end always

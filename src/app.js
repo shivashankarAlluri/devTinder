@@ -17,7 +17,14 @@ app.get("/user/getAllData",userAuth,(req,res)=>{
 app.get("/user/login",(req,res)=>{
     res.send("user data send")
 })
-
+app.delete("/user",userAuth,(req,res)=>{
+    throw new Error("bcbbhcbjbd")
+})
+app.use("/",(err,req,res,next)=>{
+    if(err){
+        res.status(500).send("something went error");
+    }
+})
 app.listen(3000,()=>{
     console.log("server is running at port 3000");
 })
