@@ -21,3 +21,8 @@
 -explore regex using /a/,/.*fly$/
 -explore req.query 
 -explore dynamic routing
+
+-Handling multiple route handler-play with the code
+-next()
+-next function and errors along with res.send()
+-using arrays[app.use("/route",rh,rh1,rh2,rh3,[rh4,rh5])]

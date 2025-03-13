@@ -2,28 +2,33 @@ const express=require("express");
 
 const app=express();
 
-app.get("/user",(req,res)=>{
-    res.send({firstName:"shiva",lastname:"Alluri"});
-})
+app.use("/user",(req,res,next)=>{
+    console.log("1st response in console");
+    //res.send("1st response")
+    next();
+},
+(req,res,next)=>{
+    console.log("2nd response in console");
+    //res.send("2nd response")
+    next();
+},
+(req,res,next)=>{
+    console.log("3rd response in console");
+    //res.send("3rd response")
+    next();
+},
+(req,res,next)=>{
+    console.log("4th response in console");
+    //res.send("4th response")
+    next();
+},
+(req,res,next)=>{
+    console.log("5th response in console");
+    res.send("5th response")
+    next();
+},
 
-app.post("/user",(req,res)=>{
-    //logic written to database
-    res.send("Data saved successfully to the database");
-})
-app.patch("/user",(req,res)=>{
-    //logic written to database
-    res.send("patch data saved successfully to the database");
-})
-app.delete("/user",(req,res)=>{
-    res.send("Deleted Successfully");
-})
-//this will match all the HTTP method API calls to /test
-app.use("/test",(req,res)=>{
-     res.send("Hello from the server");
-})
-app.use("/",(req,res)=>{
-    res.send("HAHAHAHA")
-})
+)
 
 app.listen(3000,()=>{
     console.log("server is running at port 3000");
