@@ -17,3 +17,7 @@
 -play with routes and extensions [order of the routes are important]
 -install postman and make a workspace/collection/make a api call there
 -write logic to handle GET,POST,PATCH,DELETE Api calls using postman
+-explore routing using * () + ? in routes
+-explore regex using /a/,/.*fly$/
+-explore req.query 
+-explore dynamic routing
