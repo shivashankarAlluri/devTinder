@@ -66,3 +66,9 @@ API-Get all the the users from the database
 -Install validator
 -Explore validator library function an duse validator function for password,email,photourl.
 -NEVER TRUST req.body
+
+-validate data in Signup API
+-Install bcrypt package
+-create PasswordHash using bcrypt.hash & save the user is encrypted password
+-create logi API
+-Compare paswwords and throw errors if email or password is invalid
