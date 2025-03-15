@@ -1,4 +1,5 @@
 const mongoose=require("mongoose");
+const validator=require("validator")
 
 const userSchema= new mongoose.Schema(
     {
@@ -20,12 +21,22 @@ const userSchema= new mongoose.Schema(
             lowercase:true,
             trim:true,
             required:true,
+            validate(value){
+                if(!validator.isEmail(value)){
+                    throw new Error("Email format is not correct");
+                }
+            }
         },
         password:{
             type:String,
             required:true,
             minLength:9,
-            maxLength:20
+            maxLength:20,
+            validate(value){
+                if(!validator.isStrongPassword(value)){
+                    throw new Error("Password is not strong");s
+                }
+            }
         },
         age:{
             type:Number,
@@ -33,7 +44,11 @@ const userSchema= new mongoose.Schema(
         },
         photoUrl:{
             type:String,
-            default:"https://www.shutterstock.com/image-vector/male-avatar-profile-picture-use-260nw-193292033.jpg"
+            validate(value){
+                if(!validator.isURL(value)){
+                    throw new Error("URL format is not correct");
+                }
+            }
         },
         about:{
             type:String,
