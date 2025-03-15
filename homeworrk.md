@@ -61,3 +61,8 @@ API-Get all the the users from the database
 -Create a custom validate function for gender
 -Improve validation th DB schema-PUT all appropriate validations on each field in schema
 -Add type stamps to the userschema.
+-API level validation on patch request & signup post api
+-Data Sanitizing -Add Api Validation for each field.
+-Install validator
+-Explore validator library function an duse validator function for password,email,photourl.
+-NEVER TRUST req.body

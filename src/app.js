@@ -4,6 +4,23 @@ const User=require("./models/user.js");
 const app=express();
 app.use(express.json()) //Middleware converts JSON data to Js object
 
+app.patch("/user/:userId",async(req,res)=>{
+    const userid=req.params?.userId;
+    const data=req.body;
+    try{
+        const AllowedData=["gender","age","photoUrl","about"];
+        const isUpdateAllowed=Object.keys(data).every((k)=>AllowedData.includes(k));
+        if(!isUpdateAllowed){
+            throw new Error("update not Allowed")
+        }
+        await User.findByIdAndUpdate(userid,data,{runValidators:true});
+        res.send("user updated Successfully");
+    }
+    catch(err){
+        res.status(400).send("something went wrong"+err.message);
+    }
+})
+
 app.delete("/user",async(req,res)=>{
     const userId=req.body.userId;
     try{
@@ -51,6 +68,9 @@ app.get("/feed",async(req,res)=>{
 app.post("/signup",async(req,res)=>{
     const user=new User(req.body)
     try{
+        if(user.skills?.length>10){
+            throw new Error("skills length not more than 10");
+        }
         await user.save()
         res.send("User Data added Successfully");
     }
