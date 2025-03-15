@@ -31,3 +31,33 @@
 -write a dummy auth middleware for admin and user except user/login
 
 -Error handling using app.use("/",(err,req,res,next)) at the end always
+
+
+-create a free cluster on MongoDB Official website(ongo Atlas)
+-Install mongoose library
+-Connect your application to the database  "connection-url"/devTinder
+-call the connectDB function and connect to database before starting application on 7777
+-create a userschema and Usermodel
+-create post /signup API to add data to datbase
+-push some documents using API calls from postman
+-Error Handling using try and catch
+-differenece between JSON vs Jsobject
+-Add the express.json middleware to your app
+-Make your signup API dynamic data from the end user
+-User.findone with duplicate which one it will find search it
+-GET userby email
+API-Get all the the users from the database
+-API-GET USER BY ID-findById()
+-Difference between PATCH and PUT
+-API-Update a user
+-Explore the Mongoose Documentation for Model methods
+-What are options in a model.findoneAndUpdate,explore more about it.
+-API-Update the user with emailId;
+
+
+-Explore Schema type options from the documentation
+-add required, unique, lowercase,min, minLength,trim
+-add default
+-Create a custom validate function for gender
+-Improve validation th DB schema-PUT all appropriate validations on each field in schema
+-Add type stamps to the userschema.
