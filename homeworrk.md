@@ -86,3 +86,16 @@ token and send it to user in cookie
 -set the expiry of jwt token and cookies to 7days
 -create UserSchema method to getJWT()
 -create userSchema methd to comparePassword(passwordInputByUser) 
+
+
+-Explore tinder APIs
+-create a list all API you can think of in Dev Tinder
+-Group multiple routes under respective routers
+-Explore read documentation for express.Router
+-create routes folder for managing auth,profile,request routers
+-create authRouter,profileRouter,requestRouter
+-Import these routers in app.js
+-Create logout POST /logout and test
+-create PATCH /profile/edit and /view/
+-To create patch /profile/password API=>forgot password API
+-Make sure validate all data in ecery POST,PATCH APIs

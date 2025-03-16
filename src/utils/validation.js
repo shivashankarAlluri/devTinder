@@ -13,4 +13,13 @@ const validationSignUpData=(req)=>{
     }
 
 }
-module.exports={validationSignUpData}
+
+const validateEditDetails=(req)=>{
+    const AllowedEditDetails=["age","firstName","lastName","about","skills","photoUrl","gender"];
+        const isValidated=Object.keys(req.body).every(field=>AllowedEditDetails.includes(field));
+        if(!isValidated){
+            throw new Error("choose correct fields to update");
+        }
+
+}
+module.exports={validationSignUpData,validateEditDetails}
