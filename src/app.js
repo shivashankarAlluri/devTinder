@@ -2,12 +2,16 @@ const express=require("express");
 const bcrypt=require("bcrypt");
 const connectDB=require("./config/database.js");
 const User=require("./models/user.js");
-const validator=require("validator")
+const validator=require("validator");
+const cookieParser=require("cookie-parser");
 const {validationSignUpData}=require("./utils/validation.js");
+const {userAuth}=require("./middlewares/auth.js")
 const app=express();
+const jwt=require("jsonwebtoken")
 
 
 app.use(express.json()) //Middleware converts JSON data to Js object
+app.use(cookieParser())
 
 app.post("/signup",async(req,res)=>{
 
@@ -41,8 +45,11 @@ app.post("/login",async(req,res)=>{
         if(!user){
             throw new Error("Invalid credentials");
         }
-        const hashpassword=await bcrypt.compare(password,user.password);
+        const hashpassword=await user.validatePassword(password)
+        console.log(hashpassword);
         if(hashpassword){
+            const token=await user.getJWT();
+            res.cookie("token",token,{ expires: new Date(Date.now() + 900000), httpOnly: true });
             res.send("login successfully");
         }
         else{
@@ -53,6 +60,17 @@ app.post("/login",async(req,res)=>{
         res.status(400).send("ERROR:"+err.message)
     }
 })
+app.get("/profile",userAuth,async(req,res)=>{
+    try{
+        const user=req.user;
+        res.send(user);
+    }
+    catch(err){
+        res.status(400).send("ERROR: "+err.message)
+    }
+    
+})
+
 
 app.patch("/user/:userId",async(req,res)=>{
     const userid=req.params?.userId;
@@ -79,39 +97,6 @@ app.delete("/user",async(req,res)=>{
     }
     catch(err){
         res.status(400).send("something went wrong "+err.message)
-    }
-})
-
-app.get("/user",async(req,res)=>{
-    const firstName=req.body.firstName;
-    try{
-        const users=await User.findOne({firstName:firstName});
-        console.log(users);
-        if(users.length===0){
-            res.status(401).status("user specified by Id is not there")
-        }
-        else{
-            res.send(users);
-        }
-    }
-    catch(err){
-        res.status(400).send("something went wrong"+err.message);
-    }
-})
-
-app.get("/feed",async(req,res)=>{
-    try{
-        const emailId=req.body.emailId;
-        const users=await User.find({emailId:emailId})
-        if(users.length===0){
-            res.status(401).send("users are not there");
-        }
-        else{
-            res.send(users)
-        }
-    }
-    catch(err){
-        res.status(400).send("something went wrong "+err.message);
     }
 })
 

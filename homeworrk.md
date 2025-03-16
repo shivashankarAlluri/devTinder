@@ -72,3 +72,17 @@ API-Get all the the users from the database
 -create PasswordHash using bcrypt.hash & save the user is encrypted password
 -create logi API
 -Compare paswwords and throw errors if email or password is invalid
+
+
+-InstalL cookie-parser
+-just send dummy cookie to user
+-create GET /profile API and check if you get the cookie back
+-Install jsonwebtoken
+-In login API,after email and password validation,create a JWT
+token and send it to user in cookie
+-read the cookies inside your profile API and find the logged in user
+-userAuth middleware
+-Add the userAuth middleware in profileAPI and a newsendConnectionRequest API
+-set the expiry of jwt token and cookies to 7days
+-create UserSchema method to getJWT()
+-create userSchema methd to comparePassword(passwordInputByUser) 
