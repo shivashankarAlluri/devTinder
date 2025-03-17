@@ -40,7 +40,6 @@ authRouter.post("/login",async(req,res)=>{
             throw new Error("Invalid credentials");
         }
         const hashpassword=await user.validatePassword(password)
-        console.log(hashpassword);
         if(hashpassword){
             const token=await user.getJWT();
             res.cookie("token",token,{ expires: new Date(Date.now() + 900000), httpOnly: true });

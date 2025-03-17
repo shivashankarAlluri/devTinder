@@ -7,8 +7,8 @@ const userAuth=async(req,res,next)=>{
         if(!token){
             throw new Error("Token is invalid");
         }
-        const decodedId=await jwt.verify(token,"DEVTINDER@780")
-        const user=await User.findOne({_id:decodedId})
+        const decoded=await jwt.verify(token,"DEVTINDER@780")
+        const user=await User.findOne({_id:decoded._id})
         if(!user){
             throw new Error("User not Found");
         }

@@ -99,3 +99,17 @@ token and send it to user in cookie
 -create PATCH /profile/edit and /view/
 -To create patch /profile/password API=>forgot password API
 -Make sure validate all data in ecery POST,PATCH APIs
+
+
+-Read this article Compound Interest
+-Read more about indexes in mongodb
+-why do we need index in DB?
+-what is the advantage and disadvantages of creating?
+-create a connection request Schema and add proper validations
+-send connection Request API
+-proper validation of data
+-Think about all corner cases 
+$or query and $and query
+-read about logical query
+-schema.pre("save")
+-Always think about corner case

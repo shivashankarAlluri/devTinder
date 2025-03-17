@@ -20,7 +20,6 @@ const userSchema= new mongoose.Schema(
         emailId:{
             type:String,
             unique:true,
-            lowercase:true,
             trim:true,
             required:true,
             validate(value){
@@ -66,7 +65,8 @@ const userSchema= new mongoose.Schema(
         skills:{
             type:[String]
         }
-    },
+    }
+    ,
     {
         timestamps:true
     }

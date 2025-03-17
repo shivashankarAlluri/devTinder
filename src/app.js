@@ -3,6 +3,7 @@ const connectDB=require("./config/database.js");
 const cookieParser=require("cookie-parser");
 const profileRouter=require("./routers/profileRouter.js");
 const authRouter=require("./routers/authRouter.js");
+const requestRouter=require("./routers/requestRouter.js");
 const app=express();
 
 
@@ -11,6 +12,7 @@ app.use(cookieParser())
 
 app.use("/",authRouter);
 app.use("/",profileRouter);
+app.use("/",requestRouter);
 
 
 connectDB()
