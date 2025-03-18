@@ -113,3 +113,11 @@ $or query and $and query
 -read about logical query
 -schema.pre("save")
 -Always think about corner case
+
+
+write code with proper validations for POST /request/review/:status/:requestId
+
+-Thoughtprocess - POST VS GET
+-Read about populate and ref how do we create a relation between two
+-Create GET /user/requests/received with all the checks
+-Create GET /user/connections
