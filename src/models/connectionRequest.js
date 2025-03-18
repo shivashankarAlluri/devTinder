@@ -25,4 +25,6 @@ const connectionRequestSchema=new mongoose.Schema(
     }
 )
 
+connectionRequestSchema.index({fromUserId:1});
+
 module.exports=mongoose.model("ConnectionRequest",connectionRequestSchema);
