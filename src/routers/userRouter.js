@@ -1,7 +1,8 @@
 const express=require("express");
 const ConnectionRequest=require("../models/connectionRequest.js");
 const userRouter=express.Router();
-const {userAuth}=require("../middlewares/auth.js")
+const {userAuth}=require("../middlewares/auth.js");
+const User=require("../models/user.js")
 
 
 userRouter.get("/user/received/requests",userAuth,async(req,res)=>{
@@ -46,6 +47,32 @@ userRouter.get("/user/connections",userAuth,async(req,res)=>{
     }
 })
 
+userRouter.get("/user/feed",userAuth,async(req,res)=>{
+    try{
+        const loggedInUser=req.user;
+        const connectionRequest=await ConnectionRequest.find({
+            $or:[
+                {fromUserId:loggedInUser._id},
+                {toUserId:loggedInUser._id}
+            ]
+        }).populate("fromUserId",["firstName","lastName"]).populate("toUserId",["firstName","lastName"])
+        console.log(connectionRequest);
 
+        const connectionMembers=connectionRequest.map(row=>{
+            if((row.fromUserId._id).toString()===(loggedInUser._id).toString()){
+                return row.toUserId.firstName;
+            }
+            else{
+                return row.fromUserId.firstName;
+            }
+        })
+        const dataOfallMembers=await User.find({});
+        const feed=dataOfallMembers.filter(each=>!connectionMembers.includes(each.firstName) && each.firstName !== loggedInUser.firstName );
+        res.send({message:"fetched data of users to connect",data:feed})
+
+    }catch(err){
+        res.status(400).json({message:"something went wrong"})
+    }
+})
 
 module.exports=userRouter;
