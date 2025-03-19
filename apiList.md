@@ -15,7 +15,10 @@
 -POST /request/s\send/:status/:userId
 -POST /request/view/:status/:requestId
 
-
+## userRouter
+-GET /user/requests
+-GET /user/connections
+-GET /user/feed
 
 
 
