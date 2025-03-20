@@ -55,19 +55,26 @@ userRouter.get("/user/feed",userAuth,async(req,res)=>{
                 {fromUserId:loggedInUser._id},
                 {toUserId:loggedInUser._id}
             ]
-        }).populate("fromUserId",["firstName","lastName"]).populate("toUserId",["firstName","lastName"])
-        console.log(connectionRequest);
+        }).populate("fromUserId",["firstName","lastName"]).populate("toUserId",["firstName","lastName"]);
 
         const connectionMembers=connectionRequest.map(row=>{
             if((row.fromUserId._id).toString()===(loggedInUser._id).toString()){
-                return row.toUserId.firstName;
+                return row.toUserId._id;
             }
             else{
-                return row.fromUserId.firstName;
+                return row.fromUserId._id;
             }
         })
+        console.log(connectionMembers);
         const dataOfallMembers=await User.find({});
-        const feed=dataOfallMembers.filter(each=>!connectionMembers.includes(each.firstName) && each.firstName !== loggedInUser.firstName );
+        console.log(dataOfallMembers)
+        const connectionIds = connectionMembers.map(id => id.toString());
+
+        const feed = dataOfallMembers.filter(
+            each => 
+        !connectionIds.includes(each._id.toString()) && 
+        each._id.toString() !== loggedInUser._id.toString());
+
         res.send({message:"fetched data of users to connect",data:feed})
 
     }catch(err){

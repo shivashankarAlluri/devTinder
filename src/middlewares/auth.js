@@ -1,5 +1,6 @@
 const jwt=require("jsonwebtoken");
 const User=require("../models/user")
+const dotenv=require("dotenv").config();
 
 const userAuth=async(req,res,next)=>{
     try{
@@ -7,7 +8,7 @@ const userAuth=async(req,res,next)=>{
         if(!token){
             throw new Error("Token is invalid");
         }
-        const decoded=await jwt.verify(token,"DEVTINDER@780")
+        const decoded=await jwt.verify(token,process.env.JWT_SECRET)
         const user=await User.findOne({_id:decoded._id})
         if(!user){
             throw new Error("User not Found");
