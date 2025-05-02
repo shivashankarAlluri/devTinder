@@ -121,3 +121,16 @@ write code with proper validations for POST /request/review/:status/:requestId
 -Read about populate and ref how do we create a relation between two
 -Create GET /user/requests/received with all the checks
 -Create GET /user/connections
+
+
+-Logic for GET /feed API
+-Explore the  $nin..,$and..$ne and other methods and other query operators.
+-pagination
+
+-NOTES:
+/feed?page=1&limit=10 =>first 10 users from 1-10
+
+/feed?page=2&limit10=>11-20
+/feed?page=3&limit10=>21-30
+
+skip=(page-1)*limit
